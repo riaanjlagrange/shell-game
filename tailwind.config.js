@@ -22,14 +22,8 @@ export default {
           "0%, 100": {
             transform: "translateY(0px) rotate(0)",
           },
-          "25%": {
-            transform: "translateY(-5px)",
-          },
           "50%": {
-            transform: "translateY(-20px) rotate(-10deg)",
-          },
-          "75%": {
-            transform: "translateY(-20px)",
+            transform: "translateY(-50px) rotate(-5deg)",
           },
         },
         shuffle1: {
@@ -50,6 +44,7 @@ export default {
       },
       animation: {
         peak: "peak 0.5s linear",
+        reveal: "reveal 3s ease",
         shuffle1: "shuffle1 1s ease-in-out infinite",
         shuffle2: "shuffle2 1s ease-in-out infinite",
         shuffle3: "shuffle3 1s ease-in-out infinite",
