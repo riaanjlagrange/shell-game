@@ -4,28 +4,24 @@ import { useState, useEffect } from "react";
 function Shell({ shuffle, isShuffling, hasItem }) {
   const [currentAnimation, setCurrentAnimation] = useState("");
 
-  useEffect(() => {
-    if (hasItem) {
-      setCurrentAnimation("animate-reveal hover:drop-shadow-xl");
-    }
-  }, []);
+  console.log(shuffle);
 
   useEffect(() => {
-    if (hasItem) {
-      setTimeout(() => {
+    if (!isShuffling) {
+      if (hasItem) {
         setCurrentAnimation("hover:animate-reveal hover:drop-shadow-xl");
-      }, 3000);
-    } else {
-      setCurrentAnimation("hover:animate-peak hover:drop-shadow-xl");
+      } else {
+        setCurrentAnimation("hover:animate-peak hover:drop-shadow-xl");
+      }
     }
-  }, [hasItem]);
+  }, [isShuffling, hasItem]);
 
   const item = (
     <div className="absolute bottom-[-5px] left-6 bg-amber-600 h-10 w-10 rounded-full z-10"></div>
   );
 
   return (
-    <div className={`${shuffle} relative`}>
+    <div className={`relative ${shuffle} `}>
       <div
         className={`w-20 h-[150px] bg-teal-700 relative drop-shadow-lg cursor-pointer z-20 ${
           isShuffling ? "" : currentAnimation
