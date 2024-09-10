@@ -27,7 +27,7 @@ function App() {
   };
   return (
     <div className="w-full h-[100vh] flex justify-center items-center bg-slate-800 flex-col">
-      <h1 className="text-white text-3xl font-bold mb-40">Shell Game</h1>
+      <h1 className="text-amber-600 text-3xl font-bold mb-40">Shell Game</h1>
       <div className="flex w-3/5 justify-center gap-20 mb-20">
         {boolArray.map((hasItem, idx) => (
           <Shell
