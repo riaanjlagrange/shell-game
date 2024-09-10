@@ -1,5 +1,5 @@
 import Shell from "./components/Shell";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 function App() {
   const [isShuffling, setIsShuffling] = useState(false);
@@ -9,36 +9,33 @@ function App() {
     setTimeout(() => setIsShuffling(false), 5000);
   };
 
-  const shuffleArray = (arr) => {
-    let currentIndex = arr.length;
-
-    while (currentIndex != 0) {
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [arr[currentIndex], arr[randomIndex]] = [
-        arr[randomIndex],
-        arr[currentIndex],
-      ];
-    }
-
-    return arr;
-  };
-
-  const [boolArray, setBoolArray] = useState([true, false, false]);
+  const boolArray = useMemo(() => [true, false, false], []);
   useEffect(() => {
-    if (isShuffling) {
-      setBoolArray((prev) => shuffleArray(prev));
-    }
-  }, [isShuffling]);
+    const shuffleArray = (arr) => {
+      let currentIndex = arr.length;
+
+      while (currentIndex != 0) {
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [arr[currentIndex], arr[randomIndex]] = [
+          arr[randomIndex],
+          arr[currentIndex],
+        ];
+      }
+    };
+
+    shuffleArray(boolArray);
+  }, [isShuffling, boolArray]);
+
+  useEffect(() => {});
 
   return (
     <div className="w-full h-[100vh] flex justify-center items-center bg-slate-800 flex-col">
-      <h1 className="text-amber-600 text-3xl font-bold mb-40">Shell Game</h1>
+      <h1 className="text-white text-3xl font-bold mb-40">Shell Game</h1>
       <ul className="flex w-3/5 justify-center gap-20 mb-20">
         {boolArray.map((i, idx) => (
           <Shell
             hasItem={i}
-            onShuffle={handleShuffle}
             isShuffling={isShuffling}
             shuffle={isShuffling ? `animate-shuffle${idx + 1}` : ""}
             key={idx}

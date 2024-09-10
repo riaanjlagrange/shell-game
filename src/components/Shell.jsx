@@ -25,7 +25,7 @@ function Shell({ shuffle, isShuffling, hasItem }) {
   );
 
   return (
-    <li className={`${shuffle} relative`}>
+    <div className={`${shuffle} relative`}>
       <div
         className={`w-20 h-[150px] bg-teal-700 relative drop-shadow-lg cursor-pointer z-20 ${
           isShuffling ? "" : currentAnimation
@@ -35,7 +35,7 @@ function Shell({ shuffle, isShuffling, hasItem }) {
         <div className="absolute top-[-16px] rounded-[50%] w-full h-1/4 border-slate-800 bg-teal-700 border-2"></div>
       </div>
       {hasItem && item}
-    </li>
+    </div>
   );
 }
 
