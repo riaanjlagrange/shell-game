@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 function Shell({ shuffle, isShuffling, hasItem }) {
   const [currentAnimation, setCurrentAnimation] = useState("");
 
-  console.log(shuffle);
-
   useEffect(() => {
     if (!isShuffling) {
       if (hasItem) {
