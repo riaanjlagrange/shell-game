@@ -7,6 +7,7 @@ import successSound from "../assets/sfx/success.mp3";
 function Shell({ shuffle, isShuffling, hasItem }) {
   const [currentAnimation, setCurrentAnimation] = useState("");
   const [isHovering, setIsHovering] = useState(false);
+
   console.log(isHovering);
 
   const [playError, { stopError }] = useSound(errorSound, {
@@ -52,7 +53,7 @@ function Shell({ shuffle, isShuffling, hasItem }) {
         }`}
       >
         <div className="absolute bottom-[-16px] rounded-[50%] w-full h-1/4 bg-teal-700"></div>
-        <div className="absolute top-[-16px] rounded-[50%] w-full h-1/4 border-slate-800 bg-teal-700 border-2"></div>
+        <div className="absolute top-[-16px] rounded-[50%] w-full h-1/4 border-slate-800 bg-teal-800 border-2"></div>
       </div>
       {hasItem && item}
     </div>

@@ -28,7 +28,7 @@ function App() {
   const handleShuffle = () => {
     setIsShuffling(true);
     playShuffle();
-    setTimeout(() => setIsShuffling(false), 5000);
+    setTimeout(() => setIsShuffling(false), 3000);
     setBoolArray((prev) => shuffleArray(prev));
   };
 
