@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
-function Shell({ shuffle, isShuffling, hasItem }) {
+function Shell({ shuffle, isShuffling, hasItem, onSound }) {
   const [currentAnimation, setCurrentAnimation] = useState("");
 
   useEffect(() => {
@@ -14,14 +14,19 @@ function Shell({ shuffle, isShuffling, hasItem }) {
     }
   }, [isShuffling, hasItem]);
 
+  const handleClick = () => {
+    onSound();
+  };
+
   const item = (
-    <div className="absolute bottom-[-5px] left-6 bg-amber-600 h-10 w-10 rounded-full z-10"></div>
+    <div className="absolute bottom-[-5px] left-8 bg-amber-600 h-10 w-10 rounded-full z-10"></div>
   );
 
   return (
     <div className={`relative ${shuffle} `}>
       <div
-        className={`w-20 h-[150px] bg-teal-700 relative drop-shadow-lg cursor-pointer z-20 ${
+        onMouseEnter={handleClick}
+        className={`w-24 h-[150px] bg-teal-700 relative drop-shadow-lg cursor-pointer z-20 ${
           isShuffling ? "" : currentAnimation
         }`}
       >
@@ -37,6 +42,7 @@ Shell.propTypes = {
   shuffle: PropTypes.string.isRequired,
   isShuffling: PropTypes.bool.isRequired,
   hasItem: PropTypes.bool.isRequired,
+  onSound: PropTypes.func.isRequired,
 };
 
 export default Shell;
