@@ -40,7 +40,7 @@ function Shell({ shuffle, isShuffling, hasItem }) {
   };
 
   const item = (
-    <div className="absolute bottom-[-5px] left-8 bg-amber-600 h-10 w-10 rounded-full z-10"></div>
+    <div className="absolute bottom-[-5px] left-8 bg-gradient-to-tr from-amber-800 via-amber-700 to-amber-800 h-10 w-10 rounded-full z-10"></div>
   );
 
   return (
