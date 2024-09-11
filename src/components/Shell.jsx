@@ -1,8 +1,20 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
+import useSound from "use-sound";
+import errorSound from "../assets/sfx/error.mp3";
+import successSound from "../assets/sfx/success.mp3";
 
-function Shell({ shuffle, isShuffling, hasItem, onSound }) {
+function Shell({ shuffle, isShuffling, hasItem }) {
   const [currentAnimation, setCurrentAnimation] = useState("");
+  const [isHovering, setIsHovering] = useState(false);
+  console.log(isHovering);
+
+  const [playError, { stopError }] = useSound(errorSound, {
+    volume: 0.35,
+  });
+  const [playSuccess, { stopSuccess }] = useSound(successSound, {
+    volume: 0.15,
+  });
 
   useEffect(() => {
     if (!isShuffling) {
@@ -14,8 +26,16 @@ function Shell({ shuffle, isShuffling, hasItem, onSound }) {
     }
   }, [isShuffling, hasItem]);
 
-  const handleClick = () => {
-    onSound();
+  const handleMouseEnter = () => {
+    if (!isShuffling) {
+      setIsHovering(true);
+      hasItem ? playSuccess() : playError();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    hasItem ? stopSuccess() : stopError();
   };
 
   const item = (
@@ -25,7 +45,8 @@ function Shell({ shuffle, isShuffling, hasItem, onSound }) {
   return (
     <div className={`relative ${shuffle} `}>
       <div
-        onMouseEnter={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         className={`w-24 h-[150px] bg-teal-700 relative drop-shadow-lg cursor-pointer z-20 ${
           isShuffling ? "" : currentAnimation
         }`}
@@ -42,7 +63,6 @@ Shell.propTypes = {
   shuffle: PropTypes.string.isRequired,
   isShuffling: PropTypes.bool.isRequired,
   hasItem: PropTypes.bool.isRequired,
-  onSound: PropTypes.func.isRequired,
 };
 
 export default Shell;
